@@ -11,6 +11,7 @@ import offers from './reducers/offres.js';
 import {Provider} from 'react-redux'
 import reduxThunk from 'redux-thunk'
 
+
 const store = createStore(combineReducers({startups,offers}),applyMiddleware(reduxThunk));
 store.dispatch({
   type:'SET_STARTUPS',

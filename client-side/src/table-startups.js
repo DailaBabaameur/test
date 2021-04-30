@@ -1,9 +1,15 @@
 import './navForm.css';
+// import data from './startups.csv'
 import React, { useState } from "react"
 import { Button } from 'reactstrap';
-import './startups.css'
+// import './startups.css'
 import { BrowserRouter as Router, Link } from "react-router-dom"
 import { useEffect } from 'react'
+import {ExportCSV} from './ExportCSV';
+
+const fileName = 'Startups';
+
+// continue 
 const Table = ({
    startups = [],
    loading = false,
@@ -67,6 +73,11 @@ const Table = ({
       }
 
    }
+   const data = () => {
+      return startups.map((Startup) => {
+         const { name, website } = Startup
+         return ( {name,website })})
+   }
 
    const renderTableData = () => {
       return startups.map((Startup, index) => {
@@ -74,19 +85,14 @@ const Table = ({
          return (
             <tr>
                <td >
-                  <Link to={{
-                     pathname:'/offre/'+name,
-                     state:{fromStartups:true,
-                     filtre:filtre}
-                  }}>
-                     {name} 
-                  </Link>
+                  {/* <Link to={{ pathname:'/offre/'+ name,state:{fromStartups:true, filtre:filtre} }}> {name} </Link> */}
+                  <Link > {name} </Link>
+
                </td>
 
                <td id="web">
-                  <a href={website}>{website}
-                  </a></td>
-
+                   <a href={website}>{website} </a>
+               </td>
 
             </tr>
 
@@ -150,6 +156,7 @@ Remote
          :
          <>
             <p></p>
+            <ExportCSV csvData={data()} fileName={fileName} />
             { <h1 id='title'>Start-ups List Table : {startups.length} - startup</h1>}
             <table id='offers'>
                <tbody>

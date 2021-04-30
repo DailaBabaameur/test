@@ -7,12 +7,16 @@ const fetchAllStartups = () => {
     return (dispatch) => {
         console.log('ici')
         dispatch(requestStartups())
+        console.log('ici2')
+
         Axios.get('http://localhost:3003/api/all').then(
             res => {
                 dispatch(setStartups(res.data))
             }
         ).then(dispatch(receiveStartups()))
             .catch(err => console.log('hnaaa'))
+        console.log('ici3')
+
     }
 }
 
