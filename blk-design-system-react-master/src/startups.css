@@ -1,0 +1,34 @@
+#title {
+    text-align: center;
+    font-family: arial, sans-serif;
+  }
+  
+  #offers {
+    text-align: center;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    border: 3px solid #ddd;
+    
+   
+  
+  }
+  
+  #offers td, #offers th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  #offers tr:nth-child(even){background-color: #f2f2f2;}
+  
+  #offers tr:hover {background-color: #ddd;}
+  
+  #offers th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: #369ed6;
+    color: white;
+  }
+#web{
+  width: 53%;
+}
