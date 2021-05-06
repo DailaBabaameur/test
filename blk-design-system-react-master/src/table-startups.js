@@ -7,15 +7,45 @@ import ReactNotificationsComponent, {store} from "react-notifications-component"
 import 'react-animated-css/lib/'
 import 'react-notifications-component/dist/theme.css'
 import { io } from 'socket.io-client'
+import Footer from "components/Footer/Footer.js";
 
 
 const fileName = 'Startups';
 let socket
 
+const Table2 = ({
+   startups = [],
+   fetchAllStartups = f => f,
+   filtreStartups = f=> f
+}) => {
+   const [response, setResponse] = useState("");
+   useEffect(() => {
+      socket = io("http://localhost:3006/", { forceNew: true })
+      // socket.on("connection", () => {
+      //    console.log("coucou")
+
+      //    console.log(socket.id)  
+
+      // })
+      console.log("test")
+      socket.on("FromSERV", data => {
+         console.log(data);
+         setResponse(data);
+       });
+      console.log(socket)
+      fetchAllStartups()
+   }, fetchAllStartups)
+
+   const data = () => {
+      return startups.map((Startup) => {
+         const { name, website, linkedin ,namesource,taille, lieu,secteur} = Startup
+         return ( {name,website, linkedin ,namesource,taille, lieu,secteur})})
+   }
+
 const handleOnClickDefault = () =>{
    store.addNotification({
-      title: " New card edit",
-      message:"Tom added the card",
+      title: "Nouvelle Startups :",
+      message:response,
       type:"info",
       container:"top-right",
       insert:"top",
@@ -26,26 +56,6 @@ const handleOnClickDefault = () =>{
    })
 }
 
-const Table2 = ({
-   startups = [],
-   loading = false,
-   fetchAllStartups = f => f,
-   filtreStartups = f=> f
-}) => {
-   useEffect(() => {
-      socket = io("http://192.168.1.42:3000", { forceNew: true })
-      socket.on("connect", () => {
-         console.log(socket.id)
-      })
-   
-      console.log(socket)
-      fetchAllStartups()
-   }, fetchAllStartups)
-   const data = () => {
-      return startups.map((Startup) => {
-         const { name, website, linkedin ,namesource,taille, lieu,secteur,found_info} = Startup
-         return ( {name,website, linkedin ,namesource,taille, lieu,secteur,found_info})})
-   }
    
    const [filtre, setFiltre] = useState({
       source: 0
@@ -80,37 +90,37 @@ const Table2 = ({
 
    const renderTableData = () => {
       return startups.map((Startup, index) => {
-         const { name, website , linkedin, namesource,taille, lieu,secteur,found_info } = Startup
+         const { name, website , linkedin, namesource,taille, lieu,secteur } = Startup
          return (
             
             <tr>
                <td >
-               <a href={name}>{name}</a>
+               <a >{name}</a>
                </td>
 
                <td >
-               <a href={taille}>{taille}</a>
+               <a href={taille}>taille</a>
                </td>
 
                <td >
-               <a href={lieu}>{lieu}</a>
+               <a href={lieu}>lieulieulieulieulieulieu</a>
                </td>
 
                <td >
-                  <a href={website}>{website}</a>
+                  <a href={website}>{website ? name : ''}</a>
                   </td>
 
                <td >
-               <a href={secteur}>{secteur}</a>
+               <a href={secteur}>lieulieulieulieulieu</a>
                </td>
 
                <td >
-                  <a href={linkedin}>{linkedin}</a>
+                  <a href={linkedin}>{website ? name : ''}</a>
                   </td>
 
-               <td >
+               {/* <td >
                <a href={found_info}>{found_info}</a>
-               </td>
+               </td> */}
 
                   <td >
                   <a href={namesource}>{namesource}
@@ -127,13 +137,14 @@ const Table2 = ({
    }
    return <div >
       
-      {loading ?
-         'loading...'
-         :
+     
          <>
+         <p>
+      It's <p dateTime={response}>{response}</p>
+    </p>
         <nav className="box">
 
-<div className=" justify-content-center element sourcedropdown" >
+         <div className=" justify-content-center element sourcedropdown" >
    
    <select className="form-control" name="Source" onChange={e => handleChangeSource(e)} >
       <option selected>Select Source</option>
@@ -170,9 +181,10 @@ const Table2 = ({
                </tbody>
             </Table>
             </div>
+        <Footer />
            
          </ >
-      }
+      
       
    </div>
 }
