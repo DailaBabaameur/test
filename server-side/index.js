@@ -7,15 +7,8 @@ const port = process.env.PORT || 3006;
 const got = require('got');
 const httpServer = require("http").createServer(app);
 
-// const app2 = require('http').createServer().listen(8124);
 
 
-
-// app.use(cors()); 
-// var corsOptions = {
-//    origin: 'http://localhost:3007/startups',
-//    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-//  }
 
 const schedule = require('node-schedule');
 
@@ -118,32 +111,11 @@ app.get("/api/startups", (req, res) => {
       }
    );
 });
-// var j = schedule.scheduleJob('* * * * *', async function(){
-//    console.log('This will run once a minute.');
-//    const result = await http.get('/getCompanyInfo');
-//    console.log("here la")
-//    console.log(result);
-// });
 
 
 
- let interval;
-//  const reauetteAPI = https.get('https://', (resp) => {
-//    let data = '';
+
  
-//    // A chunk of data has been received.
-//    resp.on('data', (chunk) => {
-//      data += chunk;
-//    });
- 
-//    // The whole response has been received. Print out the result.
-//    resp.on('end', () => {
-//      console.log(JSON.parse(data).explanation);
-//    });
- 
-//  }).on("error", (err) => {
-//    console.log("Error: " + err.message);
-//  });
 
 
 app.listen(3003, () => {
